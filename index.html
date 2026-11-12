@@ -226,6 +226,26 @@
   }
   .conf-list li::before{ content:"◦"; position:absolute; left:0; color:var(--teal); }
   .conf-list .cv{ font-style:italic; color:var(--teal); }
+  .conf-list .ctype{
+    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em;
+    color:var(--gold); background:var(--gold-soft);
+    border-radius:4px; padding:.05rem .4rem; margin-left:.35rem; white-space:nowrap;
+  }
+
+  /* ---------- patents ---------- */
+  .pat .ko{ font-size:.85rem; color:var(--muted); margin:-.15rem 0 .3rem; }
+  .pat .pdesc{ font-size:.88rem; color:var(--muted); margin-top:.35rem; max-width:78ch; }
+  .pat .pnum{
+    font-family:var(--font-mono); font-size:.78rem; color:var(--text); letter-spacing:.02em;
+  }
+  .pat .pmeta{ font-family:var(--font-mono); font-size:.74rem; color:var(--muted); margin-top:.2rem; }
+  .status{
+    display:inline-block; font-family:var(--font-mono); font-size:.66rem; letter-spacing:.08em;
+    text-transform:uppercase; border-radius:4px; padding:.1rem .45rem; margin-right:.5rem;
+    vertical-align:1px;
+  }
+  .status.granted{ color:#08131E; background:var(--gold); }
+  .status.published{ color:var(--teal); background:var(--teal-soft); border:1px solid rgba(60,188,177,.3); }
   .sub-label{
     font-family:var(--font-mono); font-size:.78rem; letter-spacing:.12em;
     text-transform:uppercase; color:var(--muted); margin-top:2.2rem;
@@ -303,6 +323,7 @@
       <a href="#research">Research</a>
       <a href="#experience">Experience</a>
       <a href="#publications">Publications</a>
+      <a href="#patents">Patents</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
@@ -345,6 +366,11 @@
     <div id="pub-list"></div>
     <p class="sub-label">Conference presentations</p>
     <ul class="conf-list" id="conf-list"></ul>
+  </section>
+
+  <section id="patents" class="reveal">
+    <div class="sec-head"><h2>Patents</h2><span class="tag">KIPO · REPUBLIC OF KOREA</span></div>
+    <div id="patent-list"></div>
   </section>
 
   <section id="skills" class="reveal">
@@ -415,9 +441,9 @@ const DATA = {
 
   research: [
     {
-      tag: "THESIS · MLL",
-      title: "Maskless Laser Lithography",
-      desc: "Ph.D. thesis research on a DMD based maskless laser lithography system, targeting high resolution photolithographic patterning over large areas without physical photomasks."
+      tag: "THESIS · TGV NDT",
+      title: "Non-Destructive Inspection of Through Glass Vias",
+      desc: "Ph.D. thesis research on shadow image based inspection of through glass vias: oblique illumination, telecentric imaging, and machine vision recover via diameter, taper, and tilt without cutting the glass."
     },
     {
       tag: "TGV",
@@ -442,7 +468,12 @@ const DATA = {
     {
       tag: "AI",
       title: "Process Outcome Prediction",
-      desc: "Machine learning models that predict via geometry from laser and etching parameters, trained on experimental fabrication data."
+      desc: "Machine learning models (random forest, gradient boosted trees, neural networks) that predict the full TGV cross section from laser and etching parameters, delivered through a GUI for process engineers."
+    },
+    {
+      tag: "MLL",
+      title: "Maskless Laser Lithography",
+      desc: "Research on a DMD based maskless laser lithography system, targeting high resolution photolithographic patterning over large areas without physical photomasks."
     }
   ],
 
@@ -490,7 +521,7 @@ const DATA = {
       year: "2026",
       title: "Through-glass via (TGV) fabrication in quartz and D263 glass using picosecond laser processing and chemical etching: A comparative parametric study",
       authors: "Salah ud Din, Jusam Byeon, Hafiz Muhammad Ashraf, Mujeeb Ur Rehman, Yeon-Wha Oh, Jung-Ryul Lee",
-      venue: "Optics & Laser Technology",
+      venue: "Optics & Laser Technology, Vol. 203, 116355",
       link: "https://www.sciencedirect.com/science/article/pii/S0030399226017068?dgcid=coauthor"
     },
     {
@@ -517,11 +548,91 @@ const DATA = {
   ],
 
   conferences: [
+    { text: "AI-Driven Prediction of Through-Glass Via Geometry from Laser Processing and Etching Parameters", venue: "Smart & Soft 2026, Korean Society for Composite Materials, Jeju, November 2026", type: "Oral", link: "" },
+    { text: "Background Surface Selection for Shadow Image Based Non-Destructive Inspection of Through Glass Vias", venue: "Fall Conference of the Korean Society for Nondestructive Testing, Yeosu, October 2026", type: "Oral", link: "" },
     { text: "Dual Port Robotic Scanning Free-space Measurement for Electromagnetic Evaluation of Stealth Radome Structures", venue: "Spring Conference of the Korean Society for Composite Materials, 2022", link: "https://mailab.kaist.ac.kr/publication/domestic-conference" },
     { text: "Laser Ultrasonic Inspection Based Continuous Fiber 3D Printing CFRP Bonded Cylindrical Structure Defect Visualization", venue: "Spring Conference of the Korean Society for Composite Materials, 2022", link: "https://ae.kaist.ac.kr/boards/view/board_news/12646" },
     { text: "Coordinate-based Scanning of Leading-edge Specimen for Electromagnetic Performance Evaluation Using 3-Axis Scanning Free-space Measurement Method", venue: "Spring Conference of the Korean Society for Composite Materials, 2021", link: "https://koasas.kaist.ac.kr/handle/10203/286802" },
     { text: "Rotational Scanning Free-space Measurement Method for Electromagnetic Performance Evaluation of Curved Stealth Structures", venue: "KSAS Fall Conference, 2020", link: "https://koasas.kaist.ac.kr/handle/10203/278269" }
   ],
+
+  /* ------- PATENTS -------
+     year: year registered (granted) or published (application).
+     status: "Granted" or "Published" (published application).
+     link: the KIPO DOI (https://doi.org/10.8080/ + application number)
+     opens the official KIPRIS record for each patent.               */
+  patents: [
+    {
+      year: "2025",
+      status: "Granted",
+      number: "KR 10-2866745 B1",
+      title: "System and Method for Controlling Parameters of Roll-to-Roll Apparatus",
+      titleKo: "R2R 파라미터 제어 시스템 및 방법",
+      inventors: "Jusam Byeon, Cheng-han Chiang, Syed Azkar Ul Hasan, Hafiz Muhammad Ashraf, Salah ud Din",
+      meta: "Application 10-2024-0142243, filed 17 Oct 2024 · Registered 25 Sep 2025",
+      desc: "A line scanner images the scribed web, a deep learning module estimates R2R quality parameters, and a controller adjusts the roll-to-roll laser scribing process from them.",
+      link: "https://doi.org/10.8080/1020240142243"
+    },
+    {
+      year: "2026",
+      status: "Published",
+      number: "KR 10-2026-0144829 A",
+      title: "Via Formation System and Method for Controlling the Cross-Sectional Shape of the Via",
+      titleKo: "비아의 단면 형상을 제어하는 비아 형성 시스템 및 방법",
+      inventors: "Jusam Byeon, Salah ud Din, Kifayat Numan, Hafiz Muhammad Ashraf",
+      meta: "Application 10-2025-0170796, filed 12 Nov 2025 · Published 6 Oct 2026",
+      desc: "Sets the through glass via cross section by moving the Bessel beam focus through the glass thickness before chemical etching.",
+      link: "https://doi.org/10.8080/1020250170796"
+    },
+    {
+      year: "2026",
+      status: "Published",
+      number: "KR 10-2026-0142726 A",
+      title: "Method for Predicting Via Shape or Manufacturing Conditions Using a Deep Learning Model, and a Server for Performing the Same",
+      titleKo: "딥러닝 모델을 이용한 비아 형상 또는 제조 조건의 예측 방법 및 이를 수행하는 서버",
+      inventors: "Jusam Byeon, Salah ud Din, Kifayat Numan, Hafiz Muhammad Ashraf",
+      meta: "Application 10-2025-0170802, filed 12 Nov 2025 · Published 29 Sep 2026",
+      desc: "A neural network predicts the TGV cross section from glass, Bessel beam, and etching parameters, or the process conditions needed to reach a target via shape.",
+      link: "https://doi.org/10.8080/1020250170802"
+    },
+    {
+      year: "2026",
+      status: "Published",
+      number: "KR 10-2026-0142725 A",
+      title: "Bessel Beam Generation Device and Method (interferometric phase adjustment)",
+      titleKo: "베셀 빔 생성 장치 및 방법",
+      inventors: "Jusam Byeon, Salah ud Din, Kifayat Numan",
+      meta: "Application 10-2025-0164901, filed 5 Nov 2025 · Published 29 Sep 2026",
+      desc: "Controls the polarisation of the Bessel beam with a phase adjustment module: polarising beam splitters, a driven mirror that sets the phase, and recombination before the Bessel beam generator.",
+      link: "https://doi.org/10.8080/1020250164901"
+    },
+    {
+      year: "2026",
+      status: "Published",
+      number: "KR 10-2026-0142736 A",
+      title: "Bessel Beam Generation Device and Method (rotating quarter-wave plate)",
+      titleKo: "베셀 빔 생성 장치 및 방법",
+      inventors: "Jusam Byeon, Salah ud Din, Kifayat Numan",
+      meta: "Application 10-2026-0000424, filed 2 Jan 2026 · Published 29 Sep 2026",
+      desc: "Controls the polarisation of the Bessel beam with a motorised quarter-wave plate whose rotation angle is corrected from the measured output polarisation.",
+      link: "https://doi.org/10.8080/1020260000424"
+    },
+    {
+      year: "2026",
+      status: "Published",
+      number: "KR 10-2026-0056040 A",
+      title: "System and Method for Controlling Parameters of Roll-to-Roll Apparatus (divisional)",
+      titleKo: "R2R 파라미터 제어 시스템 및 방법",
+      inventors: "Jusam Byeon, Cheng-han Chiang, Syed Azkar Ul Hasan, Hafiz Muhammad Ashraf, Salah ud Din",
+      meta: "Application 10-2025-0139166, filed 25 Sep 2025 (divisional of 10-2024-0142243) · Published 24 Apr 2026",
+      desc: "Adjusts scribing speed, line angle, web speed, and web tension from the depth, width, angle, and pitch of scribe lines identified by the deep learning module.",
+      link: "https://doi.org/10.8080/1020250139166"
+    }
+  ],
+
+  /* Every spelling of your name that should appear in bold
+     in publications and patents.                              */
+  myNames: ["Salah ud Din", "S. Din"],
 
   skills: [
     { group: "Programming", items: ["C", "C++", "C#", "Python", "MATLAB"] },
@@ -536,7 +647,7 @@ const DATA = {
       degree: "Ph.D., Aerospace Engineering",
       org: "KAIST · Daejeon, South Korea",
       link: "https://mailab.kaist.ac.kr/members/doctoral-student",
-      note: "Thesis research on maskless laser lithography, together with precision laser micromachining and optical instrumentation, under Prof. Jung-Ryul Lee."
+      note: "Thesis research on non-destructive inspection of through glass vias, together with precision laser micromachining and optical instrumentation, under Prof. Jung-Ryul Lee."
     },
     {
       when: "2019 – 2021",
@@ -589,6 +700,16 @@ const icons = {
 
 function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
+/* Escape an author list, then wrap every spelling of your name in <b>. */
+function boldMe(authors){
+  let html = esc(authors);
+  (DATA.myNames || []).forEach(n => {
+    const safe = esc(n).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    html = html.replace(new RegExp('(^|,\\s*)(' + safe + ')(?=\\s*(,|$))', 'g'), '$1<b>$2</b>');
+  });
+  return html;
+}
+
 function render(){
   document.title = DATA.name + " · " + DATA.eyebrow.split("·")[0].trim();
   document.getElementById('hero-eyebrow').textContent = DATA.eyebrow;
@@ -626,7 +747,7 @@ function render(){
 
   document.getElementById('pub-list').innerHTML = DATA.publications
     .map(p => {
-      const bold = p.authors.replace(/S\. Din/g, '<b>S. Din</b>');
+      const bold = boldMe(p.authors);
       const link = p.link ? `<a class="plink" href="${p.link}" target="_blank" rel="noopener">[article]</a>` : '';
       return `<div class="pub">
           <div class="year">${esc(p.year)}</div>
@@ -642,7 +763,26 @@ function render(){
   document.getElementById('conf-list').innerHTML = DATA.conferences
     .map(c => {
       const link = c.link ? ` <a class="plink" href="${c.link}" target="_blank" rel="noopener">[link]</a>` : '';
-      return `<li>${esc(c.text)} <span class="cv">(${esc(c.venue)})</span>${link}</li>`;
+      const type = c.type ? `<span class="ctype">${esc(c.type)}</span>` : '';
+      return `<li>${esc(c.text)} <span class="cv">(${esc(c.venue)})</span>${type}${link}</li>`;
+    })
+    .join('');
+
+  document.getElementById('patent-list').innerHTML = (DATA.patents || [])
+    .map(p => {
+      const cls = p.status.toLowerCase() === 'granted' ? 'granted' : 'published';
+      const link = p.link ? `<a class="plink" href="${p.link}" target="_blank" rel="noopener">[KIPRIS]</a>` : '';
+      return `<div class="pub pat">
+          <div class="year">${esc(p.year || '')}</div>
+          <div>
+            <h3>${esc(p.title)}</h3>
+            ${p.titleKo ? `<div class="ko" lang="ko">${esc(p.titleKo)}</div>` : ''}
+            <div class="authors">${boldMe(p.inventors)}</div>
+            <div><span class="status ${cls}">${esc(p.status)}</span><span class="pnum">${esc(p.number)}</span>${link}</div>
+            <div class="pmeta">${esc(p.meta)}</div>
+            ${p.desc ? `<div class="pdesc">${esc(p.desc)}</div>` : ''}
+          </div>
+        </div>`;
     })
     .join('');
 
