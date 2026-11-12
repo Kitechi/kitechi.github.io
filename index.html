@@ -226,12 +226,6 @@
   }
   .conf-list li::before{ content:"◦"; position:absolute; left:0; color:var(--teal); }
   .conf-list .cv{ font-style:italic; color:var(--teal); }
-  .conf-list .ctype{
-    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em;
-    color:var(--gold); background:var(--gold-soft);
-    border-radius:4px; padding:.05rem .4rem; margin-left:.35rem; white-space:nowrap;
-  }
-
   /* ---------- patents ---------- */
   .pat .ko{ font-size:.85rem; color:var(--muted); margin:-.15rem 0 .3rem; }
   .pat .pdesc{ font-size:.88rem; color:var(--muted); margin-top:.35rem; max-width:78ch; }
@@ -548,8 +542,8 @@ const DATA = {
   ],
 
   conferences: [
-    { text: "AI-Driven Prediction of Through-Glass Via Geometry from Laser Processing and Etching Parameters", venue: "Smart & Soft 2026, Korean Society for Composite Materials, Jeju, November 2026", type: "Oral", link: "" },
-    { text: "Background Surface Selection for Shadow Image Based Non-Destructive Inspection of Through Glass Vias", venue: "Fall Conference of the Korean Society for Nondestructive Testing, Yeosu, October 2026", type: "Oral", link: "" },
+    { text: "AI-Driven Prediction of Through-Glass Via Geometry from Laser Processing and Etching Parameters", venue: "Smart & Soft Conference of the Korean Society for Composite Materials, 2026", link: "" },
+    { text: "Background Surface Selection for Shadow Image Based Non-Destructive Inspection of Through Glass Vias", venue: "Fall Conference of the Korean Society for Nondestructive Testing, 2026", link: "" },
     { text: "Dual Port Robotic Scanning Free-space Measurement for Electromagnetic Evaluation of Stealth Radome Structures", venue: "Spring Conference of the Korean Society for Composite Materials, 2022", link: "https://mailab.kaist.ac.kr/publication/domestic-conference" },
     { text: "Laser Ultrasonic Inspection Based Continuous Fiber 3D Printing CFRP Bonded Cylindrical Structure Defect Visualization", venue: "Spring Conference of the Korean Society for Composite Materials, 2022", link: "https://ae.kaist.ac.kr/boards/view/board_news/12646" },
     { text: "Coordinate-based Scanning of Leading-edge Specimen for Electromagnetic Performance Evaluation Using 3-Axis Scanning Free-space Measurement Method", venue: "Spring Conference of the Korean Society for Composite Materials, 2021", link: "https://koasas.kaist.ac.kr/handle/10203/286802" },
@@ -763,8 +757,7 @@ function render(){
   document.getElementById('conf-list').innerHTML = DATA.conferences
     .map(c => {
       const link = c.link ? ` <a class="plink" href="${c.link}" target="_blank" rel="noopener">[link]</a>` : '';
-      const type = c.type ? `<span class="ctype">${esc(c.type)}</span>` : '';
-      return `<li>${esc(c.text)} <span class="cv">(${esc(c.venue)})</span>${type}${link}</li>`;
+      return `<li>${esc(c.text)} <span class="cv">(${esc(c.venue)})</span>${link}</li>`;
     })
     .join('');
 
